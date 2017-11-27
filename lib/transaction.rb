@@ -4,7 +4,7 @@ require_relative 'bank_accounts.rb'
 class Transaction
   TYPE = ["DEPOSIT", "WITHDRAWAL", "BALANCE_CHECK"]
 
-  attr_reader :date, :balance, :user_account, :type, :amount
+  attr_reader :date, :balance, :user_account, :type
 
   def initialize(user_id, pin_code, bank)
     @user_account = user_authentication(user_id, pin_code, bank)
