@@ -7,10 +7,26 @@ class Account
     @current_balance = 0
   end
 
+  def print_transactions
+    str = "Date || Credit || Debit || Balance\n"
+    transactions.each do |transaction|
+      str += transaction.date.strftime("%Y-%m-%d") + "||"
+      str += transaction.type == "DEPOSIT" ?  "||#{transaction.amount}||" : "||-||"
+      str += transaction.type == "WITHDRAWAL" ? "||#{transaction.amount}||" : "||-||"
+      str += "||" + transaction.balance.to_s 
+      str += "\n"
+    end
+    return str
+  end
+
+  def verify_account(user_id, user_pin)
+    @user_id == user_id && @user_pin == user_pin
+  end
+
   def confirm_deposit(amount)
     if acceptable_deposit_amount(amount)
       @current_balance += amount
-      return @current_balance
+      return current_balance
     end
     false
   end
@@ -18,7 +34,7 @@ class Account
   def confirm_withdrawal(amount)
     if acceptable_withdrawal_amount(amount)
       @current_balance -= amount
-      return @current_balance
+      return current_balance
     end
     false
   end

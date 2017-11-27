@@ -1,25 +1,25 @@
-require 'account'
+require_relative 'account.rb'
+require_relative 'bank_accounts.rb'
+
 class Transaction
   TYPE = ["DEPOSIT", "WITHDRAWAL", "BALANCE_CHECK"]
 
-  attr_reader :date, :balance, :user_account, :type
+  attr_reader :date, :balance, :user_account, :type, :amount
 
-  def initialize(user_id, pin_code)
-    @user_account = user_authentication(user_id, pin_code)
+  def initialize(user_id, pin_code, bank)
+    @user_account = user_authentication(user_id, pin_code, bank)
     if @user_account
       @date = Time.now
       @type = nil
       @amount = nil
-      @balance = nil
+      @balance = @user_account.current_balance 
     else
       throw Error("User does not exist")
     end
   end
 
-  def user_authentication(user_id, pin_code)
-    # implement when account class will exist 
-     Account.new("test", "test")
-     
+  def user_authentication(user_id, pin_code, bank)
+    bank.find_account(user_id, pin_code) 
   end
 
   def deposit(amount)
@@ -45,9 +45,9 @@ class Transaction
   end
 
   def balance_check
-    return user_account.current_balance
+    @type = TYPE[2]
+    @balance = user_account.current_balance
+    user_account.addTransaction(self);
+    return balance
   end
-
-
-
 end

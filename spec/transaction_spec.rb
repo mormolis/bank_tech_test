@@ -1,20 +1,25 @@
 require_relative '../lib/transaction.rb'
+require_relative '../lib/bank_accounts.rb'
+require_relative "../lib/account.rb"
 describe "Transaction" do
-  transaction = Transaction.new("george321", "12345")
+  bank = BankAccounts.new()
+  bank.create_a_new_account("george321", "12345")
+  account = bank.find_account("george321", "12345")
+  transaction = Transaction.new("george321", "12345", bank )
   describe "#initialize" do
     it "should create a time instance showing the date and time of the transaction" do
       expect(transaction.date).to be_an_instance_of(Time)
     end
 
     it "should perform user authentication before initializing a transaction" do
-      expect{Transaction.new("someone", "a pincode")}.not_to raise_error
+      expect{Transaction.new("george321", "12345", bank)}.not_to raise_error
     end
 
   end
 
   describe "#user_authentication" do
     it "#user_authentication should return true if user_id and pin_code matches a user in the 'database'" do
-      expect(transaction.user_authentication("someone", "a pincode")).to be_an_instance_of(Account)
+      expect(transaction.user_authentication("george321", "12345", bank)).to be_an_instance_of(Account)
     end
     # more tests to be writen
   end
