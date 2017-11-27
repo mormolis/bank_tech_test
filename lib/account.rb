@@ -10,7 +10,7 @@ class Account
   def confirm_deposit(amount)
     if acceptable_deposit_amount(amount)
       @current_balance += amount
-      return true
+      return @current_balance
     end
     false
   end
@@ -18,7 +18,7 @@ class Account
   def confirm_withdrawal(amount)
     if acceptable_withdrawal_amount(amount)
       @current_balance -= amount
-      return true
+      return @current_balance
     end
     false
   end

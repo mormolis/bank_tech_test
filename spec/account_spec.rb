@@ -4,11 +4,11 @@ describe "Account" do
   account = Account.new("user", "pin")
   describe "#confim_deposit" do
     it "should take positive integer and return true" do
-      expect(account.confirm_deposit(5)).to eq(true)
+      expect(account.confirm_deposit(5)).to be_kind_of(Fixnum)
     end
 
     it "should take positive float and return true" do
-      expect(account.confirm_deposit(5.00)).to eq(true)
+      expect(account.confirm_deposit(5.00)).to be_kind_of(Float)
     end
 
     it "should return false on zero and negative amounts" do\
@@ -28,11 +28,11 @@ describe "Account" do
     end
     
     it "should return true if the amount is less than the current ballance" do
-      expect(account.confirm_withdrawal(5)).to eq(true)
+      expect(account.confirm_withdrawal(5)).to be_kind_of(Float)
     end
     
     it "should return true if the amount is equal to the current ballance" do
-      expect(account.confirm_withdrawal(5.0)).to eq(true)
+      expect(account.confirm_withdrawal(5.0)).to be_kind_of(Float)
     end
 
   end

@@ -20,9 +20,28 @@ describe "Transaction" do
   end
 
   describe "#deposit" do
-    it "should comminicate with an acount " do
-
+    it "should return true  given an mount of money" do
+      expect(transaction.deposit(10)).to eq(true)
     end
+
+    it "should throw an error  given a random object" do
+      expect{transaction.deposit(Object.new)}.to raise_error
+    end
+  end
+
+  describe "#withdraw" do
+    it "should return true  given an mount of money that can be withdrawned" do
+      expect(transaction.withdraw(1)).to eq(true)
+    end
+
+    it "should throw an error  given a random object" do
+      expect{transaction.withdraw(Object.new)}.to raise_error
+    end
+
+    it "should throw an error  given an amount of money that cannot be withdrawned" do
+      expect{transaction.withdraw(Object.new)}.to raise_error
+    end
+
 
   end
 
