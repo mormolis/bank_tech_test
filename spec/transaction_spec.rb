@@ -41,9 +41,14 @@ describe "Transaction" do
     it "should throw an error  given an amount of money that cannot be withdrawned" do
       expect{transaction.withdraw(Object.new)}.to raise_error
     end
-
-
   end
+
+  describe "#balance_check" do
+    it "should return a number" do
+      expect(transaction.balance_check).to be_kind_of(Numeric)
+    end
+  end
+
 
 
 

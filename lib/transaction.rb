@@ -2,7 +2,8 @@ require 'account'
 class Transaction
   TYPE = ["DEPOSIT", "WITHDRAWAL", "BALANCE_CHECK"]
 
-  attr_reader :date, :balance, :user_account
+  attr_reader :date, :balance, :user_account, :type
+
   def initialize(user_id, pin_code)
     @user_account = user_authentication(user_id, pin_code)
     if @user_account
@@ -41,6 +42,10 @@ class Transaction
       return true
     end
     throw Error("Withdrawal was not Succesfull")
+  end
+
+  def balance_check
+    return user_account.current_balance
   end
 
 
