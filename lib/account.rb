@@ -1,5 +1,5 @@
 class Account
-  attr_reader :current_balance
+  attr_reader :current_balance, :transactions
   def initialize(user_id, user_pin)
     @transactions = []
     @user_id = user_id
@@ -21,6 +21,10 @@ class Account
       return true
     end
     false
+  end
+
+  def addTransaction(transaction)
+    @transactions << transaction
   end
 
   private

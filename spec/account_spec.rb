@@ -1,5 +1,6 @@
 require_relative "../lib/account.rb"
 describe "Account" do
+  let(:transaction) { :transaction }
   account = Account.new("user", "pin")
   describe "#confim_deposit" do
     it "should take positive integer and return true" do
@@ -25,16 +26,24 @@ describe "Account" do
     it "should return false if the amount is greater than the current ballance" do
       expect(account.confirm_withdrawal(100)).to eq(false)
     end
+    
     it "should return true if the amount is less than the current ballance" do
-
       expect(account.confirm_withdrawal(5)).to eq(true)
     end
+    
     it "should return true if the amount is equal to the current ballance" do
-
       expect(account.confirm_withdrawal(5.0)).to eq(true)
     end
 
   end
+
+  describe "#addTransaction" do
+    it "adds a transaction to the transactions array" do
+      expect {account.addTransaction(transaction)}.to change {account.transactions.count}.from(0).to(1)
+    end
+  end
+
+  
 
 
 end
